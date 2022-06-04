@@ -48,8 +48,22 @@ chatForm.addEventListener("submit", (e) => {
 
 function outputMessage(message) {
   const div = document.createElement("div");
-  div.classList.add("message");
-  div.innerHTML = `<p class="meta">${message.username} <span>${message.time}</span></p>
+  if (message.username === username) {
+    div.classList.add("message", "right");
+  } else if (message.username === "Admin") {
+    div.classList.add("message", "admin");
+  } else {
+    div.classList.add("message", "left");
+  }
+  div.innerHTML = `<p class=${
+    message.username === username
+      ? "myMeta"
+      : message.username === "Admin"
+      ? "meta"
+      : "personMeta"
+  }>${message.username === username ? "You" : message.username} <span>${
+    message.time
+  }</span></p>
   <p class="text">
     ${message.text}
   </p>`;
